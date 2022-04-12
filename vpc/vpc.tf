@@ -68,6 +68,7 @@ resource "ibm_is_public_gateway" "repo_gateway" {
   count = var.frontend_count
   name  = "${var.unique_id}-public-gtw-${count.index}"
   vpc   = ibm_is_vpc.vpc.id
+  resource_group = data.ibm_resource_group.all_rg.id
   zone  = "${var.ibm_region}-${count.index % 3 + 1}"
 
   //User can configure timeouts
