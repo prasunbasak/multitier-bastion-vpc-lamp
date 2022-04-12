@@ -37,6 +37,7 @@ resource "ibm_is_vpc_address_prefix" "frontend_subnet_prefix" {
   name  = "${var.unique_id}-frontend-prefix-zone-${count.index + 1}"
   zone  = "${var.ibm_region}-${count.index % 3 + 1}"
   vpc   = ibm_is_vpc.vpc.id
+  resource_group = data.ibm_resource_group.all_rg.id
   cidr  = var.frontend_cidr_blocks[count.index]
 
 }
@@ -55,6 +56,7 @@ resource "ibm_is_subnet" "frontend_subnet" {
   count           = var.frontend_count
   name            = "${var.unique_id}-frontend-subnet-${count.index + 1}"
   vpc             = ibm_is_vpc.vpc.id
+  resource_group  = data.ibm_resource_group.all_rg.id
   zone            = "${var.ibm_region}-${count.index % 3 + 1}"
   ipv4_cidr_block = var.frontend_cidr_blocks[count.index]
   #network_acl     = "${ibm_is_network_acl.multizone_acl.id}"
