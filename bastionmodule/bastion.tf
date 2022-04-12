@@ -38,6 +38,7 @@ resource "ibm_is_floating_ip" "bastion" {
   count  = var.bastion_count
   name   = "${var.unique_id}-float-bastion-ip-${count.index + 1}"
   target = ibm_is_instance.bastion[count.index].primary_network_interface[0].id
+  resource_group = var.ibm_is_resource_group_id
 }
 
 
