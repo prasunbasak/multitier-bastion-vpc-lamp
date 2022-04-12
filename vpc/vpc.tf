@@ -37,7 +37,6 @@ resource "ibm_is_vpc_address_prefix" "frontend_subnet_prefix" {
   name  = "${var.unique_id}-frontend-prefix-zone-${count.index + 1}"
   zone  = "${var.ibm_region}-${count.index % 3 + 1}"
   vpc   = ibm_is_vpc.vpc.id
-  resource_group = data.ibm_resource_group.all_rg.id
   cidr  = var.frontend_cidr_blocks[count.index]
 
 }
